@@ -8,6 +8,12 @@ import sun.awt.SunHints;
 /**
  * @SpringBootApplication 标注一个主程序类，说明这是一个Spring Boot应用
  */
+/**
+ * HelloWorldMainApplication
+ *
+ * @author shuai
+ * @date 2018/11/20
+ */
 //@ImportResource(locations = {"classpath:beans.xml"})
 @SpringBootApplication
 public class HelloWorldMainApplication {
