@@ -1,17 +1,17 @@
-server:
-  port: 8010
-spring:
-  profiles:
-    active: dev
-
----
-server:
-  port: 8020
-spring:
-  profiles: dev
-
----
- server:
-  port: 8030
- spring:
-   profiles: prod
+#server:
+#  port: 8010
+#spring:
+#  profiles:
+#    active: dev
+#
+#---
+#server:
+#  port: 8020
+#spring:
+#  profiles: dev
+#
+#---
+# server:
+#  port: 8030
+# spring:
+#   profiles: prod
