@@ -10,13 +10,13 @@
 
 		<title>Dashboard Template for Bootstrap</title>
 		<!-- Bootstrap core CSS -->
-		<link href="asserts/css/bootstrap.min.css" rel="stylesheet">
+		<link href="asserts/css/bootstrap.min.css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.css}">
 
 		<!-- Custom styles for this template -->
-		<link href="asserts/css/dashboard.css" rel="stylesheet">
+		<link href="asserts/css/dashboard.css" rel="stylesheet" th:href="@{/asserts/css/dashboard.css}">
 		<style type="text/css">
 			/* Chart.js */
-			
+
 			@-webkit-keyframes chartjs-render-animation {
 				from {
 					opacity: 0.99
@@ -25,7 +25,7 @@
 					opacity: 1
 				}
 			}
-			
+
 			@keyframes chartjs-render-animation {
 				from {
 					opacity: 0.99
@@ -34,7 +34,7 @@
 					opacity: 1
 				}
 			}
-			
+
 			.chartjs-render-monitor {
 				-webkit-animation: chartjs-render-animation 0.001s;
 				animation: chartjs-render-animation 0.001s;
@@ -75,12 +75,15 @@
 									<td th:text="${emp.department.departmentName}"></td>
 									<td th:text="${#dates.format(emp.birth,	'yyyy-MM-dd HH:mm')}"></td>
 									<td>
-										<button class="btn btn-sm btn-primary">编辑</button>
-										<button class="btn btn-sm btn-danger">删除</button>
-									</td>
+										<a class="btn btn-sm btn-primary" th:href="@{/emp/}+${emp.id}">编辑</a>
+                                        <button type="submit" class="btn btn-sm btn-danger deleteBtn" th:attr="del_uri=@{/emp/}+${emp.id}">删除</button>
+                                    </td>
 								</tr>
 							</tbody>
 						</table>
+                        <form id="deleteEmpForm" method="post">
+                            <input type="hidden" name="_method" value="delete">
+                        </form>
 					</div>
 				</main>
 			</div>
@@ -89,18 +92,24 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js"></script>
-		<script type="text/javascript" src="asserts/js/popper.min.js"></script>
-		<script type="text/javascript" src="asserts/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/webjars/jquery/3.3.1-1/jquery.js}"></script>
+		<script type="text/javascript" src="asserts/js/popper.min.js" th:src="@{/asserts/js/popper.min.js}"></script>
+		<script type="text/javascript" src="asserts/js/bootstrap.min.js" th:src="@{/asserts/js/bootstrap.min.js}"></script>
 
 		<!-- Icons -->
-		<script type="text/javascript" src="asserts/js/feather.min.js"></script>
+		<script type="text/javascript" src="asserts/js/feather.min.js" th:src="@{/asserts/js/feather.min.js}"></script>
 		<script>
 			feather.replace()
 		</script>
+        <script>
+            $(".deleteBtn").click(function () {
+                // 删除当前员工
+                $("#deleteEmpForm").attr("action",$(this).attr("del_uri")).submit();
+            });
+        </script>
 
 		<!-- Graphs -->
-		<script type="text/javascript" src="asserts/js/Chart.min.js"></script>
+		<script type="text/javascript" src="asserts/js/Chart.min.js" th:src="@{/asserts/js/Chart.min.js}"></script>
 		<script>
 			var ctx = document.getElementById("myChart");
 			var myChart = new Chart(ctx, {
