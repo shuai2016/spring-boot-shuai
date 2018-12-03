@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.Collection;
 
 /**
@@ -65,7 +64,7 @@ public class EmployeeController {
 	@PostMapping("/emp")
 	public String addEmp(Employee employee) {
 		logger.info("添加员工");
-		logger.debug("员工信息：{}",employee);
+		logger.debug("员工信息：{}", employee);
 		employeeDao.save(employee);
 		//来到员工列表页面
 		//redirect：表示重定向到一个地址
@@ -75,42 +74,45 @@ public class EmployeeController {
 
 	/**
 	 * 查出当前员工，跳转到修改页面，回显
+	 *
 	 * @return
 	 */
 	@GetMapping("/emp/{id}")
-	public String toEditPage(ModelMap modelMap,@PathVariable("id") Integer id){
+	public String toEditPage(ModelMap modelMap, @PathVariable("id") Integer id) {
 		logger.info("修改员工跳转");
 		Employee employee = employeeDao.get(id);
-		logger.debug("当前员工：{}",employee);
+		logger.debug("当前员工：{}", employee);
 		//查询所有部门
 		Collection<Department> departments = departmentDao.getDepartments();
 		modelMap.put("depts", departments);
-		modelMap.put("emp",employee);
+		modelMap.put("emp", employee);
 		//回到修改页面（add是一个修改添加二合一的页面）
 		return "emp/add";
 	}
 
 	/**
 	 * 员工修改
+	 *
 	 * @param employee
 	 * @return
 	 */
 	@PutMapping("/emp")
-	public String updateEmployee(Employee employee){
+	public String updateEmployee(Employee employee) {
 		logger.info("员工修改");
-		logger.debug("修改后员工信息：{}",employee);
+		logger.debug("修改后员工信息：{}", employee);
 		employeeDao.save(employee);
 		return "redirect:/emps";
 	}
 
 	/**
 	 * 员工删除
+	 *
 	 * @return
 	 */
 	@DeleteMapping("/emp/{id}")
-	public String deleteEmployee(@PathVariable("id") Integer id){
+	public String deleteEmployee(@PathVariable("id") Integer id) {
 		logger.info("员工删除");
-		logger.debug("员工id={}",id);
+		logger.debug("员工id={}", id);
 		employeeDao.delete(id);
 		return "redirect:/emps";
 	}
