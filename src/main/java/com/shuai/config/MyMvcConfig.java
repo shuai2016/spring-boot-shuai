@@ -39,7 +39,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 			@Override
 			public void addInterceptors(InterceptorRegistry registry) {
 				//SpringBoot已经做好了静态资源映射，不用手动排除对静态资源的拦截
-				registry.addInterceptor(new LoginHandlerInercepter()).addPathPatterns("/**").excludePathPatterns("/index.html","/","/user/login");
+				registry.addInterceptor(new LoginHandlerInercepter()).addPathPatterns("/**").excludePathPatterns("/index.html","/","/user/login","/json/*");
 			}
 		};
 		return adapter;
