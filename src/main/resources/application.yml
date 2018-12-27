@@ -35,4 +35,5 @@ mybatis:
 #      - classpath:sql/department.sql
 #      - classpath:sql/employee.sql
 json:
-  url: E:\myFile\json\data.json
+  url: E:\myFile\json\
+  cardiogramUrl: E:\myFile\cardiogram\
