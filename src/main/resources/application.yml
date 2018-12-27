@@ -34,3 +34,5 @@ mybatis:
 #    schema:
 #      - classpath:sql/department.sql
 #      - classpath:sql/employee.sql
+json:
+  url: E:\myFile\json\data.json
