@@ -14,7 +14,6 @@ import sun.awt.SunHints;
  * @author shuai
  * @date 2018/11/20
  */
-//@ImportResource(locations = {"classpath:beans.xml"})
 @SpringBootApplication
 public class HelloWorldMainApplication {
     public static void main(String[] args) {

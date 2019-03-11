@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/plan/addPlanDo}">
+    <select name="year">
+        <option>2018</option>
+    </select>
+    <span>年-</span>
+    <select name="month">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+        <option>11</option>
+        <option>12</option>
+    </select>
+    <span>月-姓名：</span>
+    <input type="text" name="username">
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
