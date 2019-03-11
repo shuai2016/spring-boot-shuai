@@ -13,6 +13,7 @@ public class Plan {
 	private int id;
 	private int year;
 	private int month;
+	private int day;
 	private Date date;
 	private String week;
 	private String username;
@@ -41,6 +42,14 @@ public class Plan {
 
 	public void setMonth(int month) {
 		this.month = month;
+	}
+
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
 	}
 
 	public Date getDate() {
@@ -89,6 +98,7 @@ public class Plan {
 				"id=" + id +
 				", year=" + year +
 				", month=" + month +
+				", day=" + day +
 				", date=" + date +
 				", week='" + week + '\'' +
 				", username='" + username + '\'' +
