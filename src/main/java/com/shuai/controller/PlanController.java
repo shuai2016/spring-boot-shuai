@@ -21,8 +21,7 @@ import java.util.List;
 @RequestMapping("/plan")
 public class PlanController {
 
-	Logger log = LoggerFactory.getLogger(PlanController.class);
-
+	private final Logger log = LoggerFactory.getLogger(PlanController.class);
 	@Autowired
 	private PlanService planService;
 
@@ -33,11 +32,15 @@ public class PlanController {
 
 	@RequestMapping("/addPlanDo")
 	public String addPlanDo(int year, int month, String username) {
-		List<PlanVO> query = planService.query();
-		System.out.println(query);
-		log.info("year->{}",year);
-		log.info("month->{}",month);
-		log.info("username->{}",username);
+		log.info("year->{}", year);
+		log.info("month->{}", month);
+		log.info("username->{}", username);
+		List<PlanVO> list = planService.query(year, month, username);
+		if (list == null || list.size() == 0) {
+			boolean add = planService.add(year, month, username);
+			System.out.println(add);
+		}
+
 		return "addPlan";
 	}
 }
