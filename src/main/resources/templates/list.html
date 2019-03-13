@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/jquery-3.3.1.min.js}"></script>
+</head>
+<body>
+<div align="center">
+    <div th:if="${type == 0}"><span style="color: red">[[${message}]]，</span><a th:href="@{/plan/addPlan}">跳转至生成页面</a></div>
+    <div th:if="${type == 1}">
+        <form th:action="@{/plan/list}" method="post">
+            <select name="year">
+                <option>2019</option>
+            </select>
+            <span>年-</span>
+            <select name="month">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+            </select>
+            <span>月</span>
+            <input type="hidden" name="username" th:value="${username}" id="sss">
+            <input type="submit" value="提交">
+        </form>
+        <table border="1" cellspacing="0" cellpadding="5">
+            <th>NO.</th>
+            <th>username</th>
+            <th>date</th>
+            <th>week</th>
+            <th>plan</th>
+            <th>finish</th>
+            <th>operation</th>
+            <tr th:each="plan,planStat : ${list}">
+                <td th:text="${planStat.count}">NO.</td>
+                <td th:text="${plan.username}">username</td>
+                <td th:text="${plan.date}">date</td>
+                <td th:text="${plan.week}">week</td>
+                <td><textarea rows="5" cols="50" th:value="${plan.plan}" name="plan"></textarea></td>
+                <td><textarea rows="5" cols="50" th:value="${plan.finish}" name="finish"></textarea></td>
+                <td><input type="button" onclick="save()" value="save"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    function save(){
+        var val = $("#sss").val();
+        alert(val);
+    }
+</script>
+</body>
+</html>
