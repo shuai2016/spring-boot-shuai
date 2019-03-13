@@ -7,29 +7,39 @@
 </head>
 <body>
 <div align="center">
+    <div th:if="${type == 0}">
+        <span style="color: green">已生成</span><a th:href="@{/plan/list(username=${username})}">跳转至列表页面</a>
+    </div>
+    <div th:if="${type == 1}">
+        <span style="color: red">[[${message}]]</span><a th:href="@{/plan/list(username=${username})}">跳转至列表页面</a>
+    </div>
+</div>
+<hr style="height:10px;border:none;border-top:10px groove skyblue;"/>
+<div align="center">
     <form th:action="@{/plan/addPlanDo}" method="post">
         <select name="year">
-            <option>2019</option>
+            <option th:selected="${year == 2019}">2019</option>
         </select>
         <span>年-</span>
         <select name="month">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
+            <option th:selected="${month == 1}">1</option>
+            <option th:selected="${month == 2}">2</option>
+            <option th:selected="${month == 3}">3</option>
+            <option th:selected="${month == 4}">4</option>
+            <option th:selected="${month == 5}">5</option>
+            <option th:selected="${month == 6}">6</option>
+            <option th:selected="${month == 7}">7</option>
+            <option th:selected="${month == 8}">8</option>
+            <option th:selected="${month == 9}">9</option>
+            <option th:selected="${month == 10}">10</option>
+            <option th:selected="${month == 11}">11</option>
+            <option th:selected="${month == 12}">12</option>
         </select>
         <span>月-姓名：</span>
-        <input type="text" name="username">
-        <input type="submit" value="提交">
+        <input type="text" name="username" th:value="${username}">
+        <input type="submit" value="生成">
     </form>
+    <hr style="height:10px;border:none;border-top:10px groove skyblue;"/>
 </div>
 </body>
 </html>

@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class PlanService {
 	private final Logger log = LoggerFactory.getLogger(PlanService.class);
-	private static final String url = "jdbc:mysql:///test";
+	private static final String url = "jdbc:mysql:///test?characterEncoding=utf-8";
 	private static final String user = "root";
 	private static final String password = "root";
 
@@ -114,6 +114,35 @@ public class PlanService {
 			ps.executeBatch();
 			conn.commit();
 			ps.clearBatch();
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return flag;
+	}
+	public boolean update(int id,String plan,String finish) {
+		boolean flag = false;
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = getConnection(url, user, password);
+			String sql = "UPDATE plan SET plan=?,finish=? WHERE id=?";
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1,plan);
+			ps.setString(2,finish);
+			ps.setInt(3,id);
+
+			boolean execute = ps.execute();
+			System.out.println(execute);
+
 			flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();

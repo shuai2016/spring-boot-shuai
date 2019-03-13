@@ -4,35 +4,42 @@
     <meta charset="UTF-8">
     <meta charset="UTF-8">
     <title>Title</title>
-    <script th:src="@{/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.3.1-1/jquery.js}"></script>
+
 </head>
 <body>
 <div align="center">
-    <div th:if="${type == 0}"><span style="color: red">[[${message}]]，</span><a th:href="@{/plan/addPlan}">跳转至生成页面</a></div>
-    <div th:if="${type == 1}">
+    <div th:if="${type == 0}">
+        <span style="color: red">[[${message}]]，</span><a th:href="@{/plan/addPlan(year=${year},month=${month},username=${username})}">跳转至生成页面</a>
+        <hr style="height:10px;border:none;border-top:10px groove skyblue;"/>
+    </div>
+    <div>
         <form th:action="@{/plan/list}" method="post">
             <select name="year">
-                <option>2019</option>
+                <option th:selected="${year == 2019}">2019</option>
             </select>
             <span>年-</span>
             <select name="month">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
+                <option th:selected="${month == 1}">1</option>
+                <option th:selected="${month == 2}">2</option>
+                <option th:selected="${month == 3}">3</option>
+                <option th:selected="${month == 4}">4</option>
+                <option th:selected="${month == 5}">5</option>
+                <option th:selected="${month == 6}">6</option>
+                <option th:selected="${month == 7}">7</option>
+                <option th:selected="${month == 8}">8</option>
+                <option th:selected="${month == 9}">9</option>
+                <option th:selected="${month == 10}">10</option>
+                <option th:selected="${month == 11}">11</option>
+                <option th:selected="${month == 12}">12</option>
             </select>
             <span>月</span>
-            <input type="hidden" name="username" th:value="${username}" id="sss">
-            <input type="submit" value="提交">
+            <input type="text" name="username" th:value="${username}">
+            <input type="submit" value="查询">
         </form>
+    </div>
+    <hr style="height:10px;border:none;border-top:10px groove skyblue;"/>
+    <div th:if="${type == 1}">
         <table border="1" cellspacing="0" cellpadding="5">
             <th>NO.</th>
             <th>username</th>
@@ -42,21 +49,44 @@
             <th>finish</th>
             <th>operation</th>
             <tr th:each="plan,planStat : ${list}">
+                <input type="hidden" name="id" th:value="${plan.id}">
                 <td th:text="${planStat.count}">NO.</td>
                 <td th:text="${plan.username}">username</td>
                 <td th:text="${plan.date}">date</td>
                 <td th:text="${plan.week}">week</td>
-                <td><textarea rows="5" cols="50" th:value="${plan.plan}" name="plan"></textarea></td>
-                <td><textarea rows="5" cols="50" th:value="${plan.finish}" name="finish"></textarea></td>
-                <td><input type="button" onclick="save()" value="save"></td>
+                <td><textarea rows="4" cols="50" name="plan" th:text="${plan.plan}"></textarea></td>
+                <td><textarea rows="4" cols="50" name="finish" th:text="${plan.finish}"></textarea></td>
+                <td><input type="button" onclick="save(this)" value="save"></td>
             </tr>
         </table>
     </div>
 </div>
-<script>
-    function save(){
-        var val = $("#sss").val();
-        alert(val);
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    ctxPath = /*[[@{/}]]*/ '';
+
+    /*]]>*/
+    function save(that) {
+        var id = $(that).parent().parent().find('input[name=id]').val();
+        var plan = $(that).parent().siblings().find('textarea[name=plan]').val();
+        var finish = $(that).parent().siblings().find('textarea[name=finish]').val();
+
+        $.ajax({
+            url: ctxPath + 'plan/update',
+            type: 'post',
+            data: {
+                id: id,
+                plan: plan,
+                finish: finish
+            },
+            success: function (result) {
+                if (result == 0) {
+                    alert("保存成功");
+                } else if (result == 1) {
+                    alert("保存失败 ");
+                }
+            }
+        })
     }
 </script>
 </body>

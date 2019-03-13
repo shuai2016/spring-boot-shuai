@@ -1,0 +1,2 @@
+nohup java -jar spring-boot-shuai-1.0-SNAPSHOT.jar > plan.log 2>&1 &
+ps -ef|grep

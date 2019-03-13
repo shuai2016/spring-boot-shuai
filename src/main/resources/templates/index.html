@@ -6,10 +6,14 @@
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{/plan/list}" method="post">
-    <span>姓名：</span>
-    <input type="text" name="username">
-    <input type="submit" value="提交">
-</form>
+<div align="center">
+    <hr style="height:10px;border:none;border-top:10px groove skyblue;"/>
+    <form th:action="@{/plan/login}" method="post">
+        <span>姓名：</span>
+        <input type="text" name="username">
+        <input type="submit" value="查看">
+    </form>
+    <hr style="height:10px;border:none;border-top:10px groove skyblue;"/>
+</div>
 </body>
 </html>
